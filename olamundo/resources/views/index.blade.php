@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculadora de IMC</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body class="container mt-5">
     <h2>Calculadora de IMC</h2>
@@ -26,8 +26,11 @@
             <label for="altura" class="form-label">Altura (m):</label>
             <input type="number" name="altura" id="altura" class="form-control" step="0.01" required placeholder="Exemplo: 1.75">
         </div>
+        <div class="mb-3">
+            <label for="horas_dormidas" class="form-label">Número médio de horas dormidas:</label>
+            <input type="number" name="horas_dormidas" id="horas_dormidas" class="form-control" required placeholder="Exemplo: 8">
+        </div>
         <button type="submit" class="btn btn-primary">Calcular</button>
     </form>
 </body>
 </html>
-
