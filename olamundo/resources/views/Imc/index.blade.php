@@ -8,7 +8,7 @@
 </head>
 <body class="container mt-5">
     <h2>Calculadora de IMC</h2>
-    <form action="{{ route('calcular.imc') }}" method="POST">
+    <form action="{{ route('imc.calcular') }}" method="POST">
         @csrf
         <div class="mb-3">
             <label for="nome" class="form-label">Nome:</label>
