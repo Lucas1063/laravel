@@ -14,7 +14,7 @@ return new class extends Migration
             $table->decimal('valor_combustivel', 8, 2);
             $table->integer('distancia');
             $table->integer('consumo');
-            $table->decimal('custo_total', 8, 2);
+            $table->decimal('custo_total', 8, 2)->nullable(); // Permite valores nulos
             $table->timestamps();
         });
     }

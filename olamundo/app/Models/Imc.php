@@ -10,7 +10,6 @@ class Imc extends Model
 {
     use HasFactory;
 
-    // Defina os campos que podem ser preenchidos via atribuição em massa
     protected $fillable = [
         'nome',
         'data_nascimento',
@@ -19,23 +18,21 @@ class Imc extends Model
         'horas_dormidas',
     ];
 
-    // Accessor para formatar a data de nascimento
     public function setDataNascimentoAttribute($value)
     {
         $this->attributes['data_nascimento'] = Carbon::createFromFormat('Y-m-d', $value);
     }
+
     public function getDataNascimentoFormatadaAttribute()
     {
         return $this->data_nascimento->format('d/m/Y');
     }
 
-    // Método para calcular o IMC
     public function calcularIMC()
     {
         return $this->peso / ($this->altura * $this->altura);
     }
 
-    // Método para classificar o IMC
     public function classificarIMC()
     {
         $imc = $this->calcularIMC();
@@ -51,15 +48,35 @@ class Imc extends Model
         }
     }
 
-    // Método para avaliar a qualidade do sono
+    public function getIdadeAttribute()
+    {
+        return $this->data_nascimento->age;
+    }
+
     public function avaliarQualidadeDoSono()
     {
-        if ($this->horas_dormidas >= 7 && $this->horas_dormidas <= 9) {
-            return 'Qualidade de sono ideal';
-        } elseif ($this->horas_dormidas < 7) {
-            return 'Poucas horas de sono';
-        } else {
-            return 'Muitas horas de sono';
+        $idade = $this->idade;
+        $horas = $this->horas_dormidas;
+
+        $faixas = [
+            [0, 10, 10, 20],   // Crianças de 0 a 10 anos
+            [11, 19, 10, 20],  // Jovens de 10 a 20 anos
+            [20, 64, 7, 9],    // Adultos de 20 a 65 anos
+            [65, 150, 7, 8],   // Idosos a partir de 65 anos
+        ];
+
+        foreach ($faixas as [$min, $max, $minHoras, $maxHoras]) {
+            if ($idade >= $min && $idade <= $max) {
+                if ($horas < $minHoras) {
+                    return 'Poucas horas de sono';
+                } elseif ($horas > $maxHoras) {
+                    return 'Muitas horas de sono';
+                } else {
+                    return 'Qualidade de sono ideal';
+                }
+            }
         }
+
+        return 'Faixa etária não encontrada';
     }
 }

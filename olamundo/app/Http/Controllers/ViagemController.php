@@ -20,18 +20,15 @@ class ViagemController extends Controller
             'distancia' => 'required|numeric',
             'consumo' => 'required|numeric',
         ]);
-    
-        $custo_total = ($request->distancia / $request->consumo) * $request->valor_combustivel;
-    
+
+        // Criar o objeto sem definir custo_total manualmente
         $viagem = ViagemCalculo::create([
             'combustivel' => $request->combustivel,
             'valor_combustivel' => $request->valor_combustivel,
             'distancia' => $request->distancia,
-            'consumo' => $request->consumo,
-            'custo_total' => $custo_total
+            'consumo' => $request->consumo
         ]);
-    
+
         return view('viagem.resultado', compact('viagem'));
     }
-    
 }

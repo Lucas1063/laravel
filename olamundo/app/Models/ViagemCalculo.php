@@ -12,4 +12,18 @@ class ViagemCalculo extends Model
     protected $fillable = [
         'combustivel', 'valor_combustivel', 'distancia', 'consumo', 'custo_total'
     ];
+
+    // Método para calcular o custo total da viagem
+    public function calcularCustoTotal()
+    {
+        return ($this->distancia > 0 && $this->consumo > 0) 
+            ? ($this->distancia / $this->consumo) * $this->valor_combustivel 
+            : null;
+    }
+
+    // Accessor para retornar o custo total
+    public function getCustoTotalAttribute()
+    {
+        return $this->calcularCustoTotal();
+    }
 }

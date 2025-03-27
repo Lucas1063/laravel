@@ -22,7 +22,7 @@ class ImcController extends Controller
             'horas_dormidas' => 'required|numeric|min:0|max:24',
         ]);
 
-        // Aqui você deve criar um novo objeto do modelo Imc com os dados validados
+    
         $imc = new Imc($dados);
 
         // Retorna a view 'resultado' com os dados do IMC

@@ -25,6 +25,6 @@
     </div>
     @endif
 
-    <a href="{{ route('imc.index') }}" class="btn btn-primary mt-3">Voltar</a>
+    <a href="{{ route('home') }}" class="btn btn-primary mt-3">Voltar</a>
 </body>
 </html>
